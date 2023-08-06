@@ -1,25 +1,38 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { fetchData } from "./utils/api";
-import { getApiConfiguration } from "./store/homeSlice";
+import { Home, Explore, PageNotFound, Details, SearchResult } from "./pages";
+import { Header, Footer } from "./components";
 
 function App() {
-	const dispatch = useDispatch();
-	const url = useSelector((state) => state.home.url);
-	console.log(url);
-	useEffect(() => {
-		apiTesting();
-	}, []);
-
-	const apiTesting = () => {
-		fetchData("/movie/popular").then((data) => {
-			dispatch(getApiConfiguration(data));
-		});
-	};
-
-	return <div className='app'>App</div>;
+	return (
+		<BrowserRouter>
+			<Header />
+			<Routes>
+				<Route
+					path='/'
+					element={<Home />}
+				/>
+				<Route
+					path='/:mediaType/:id'
+					element={<Details />}
+				/>
+				<Route
+					path='/search/:query'
+					element={<SearchResult />}
+				/>
+				<Route
+					path='/explore/:mediaType'
+					element={<Explore />}
+				/>
+				<Route
+					path='*'
+					element={<PageNotFound />}
+				/>
+			</Routes>
+			<Footer />
+		</BrowserRouter>
+	);
 }
 
 export default App;
