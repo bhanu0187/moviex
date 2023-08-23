@@ -28,7 +28,8 @@ function App() {
 	};
 	return (
 		<BrowserRouter>
-			{/* <Header /> */}
+			<Header />
+
 			<Routes>
 				<Route
 					path='/'
@@ -52,6 +53,7 @@ function App() {
 				/>
 			</Routes>
 			{/* <Footer /> */}
+			<div style={{ height: 900 }}></div>
 		</BrowserRouter>
 	);
 }
