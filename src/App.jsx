@@ -52,8 +52,8 @@ function App() {
 					element={<PageNotFound />}
 				/>
 			</Routes>
-			{/* <Footer /> */}
 			<div style={{ height: 900 }}></div>
+			<Footer />
 		</BrowserRouter>
 	);
 }
