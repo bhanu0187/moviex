@@ -4,8 +4,6 @@ import "./style.scss";
 const Switchtabs = ({ data, onTabChange }) => {
 	const [selectedTab, setSelectedTab] = useState(0);
 	const [left, setLeft] = useState(0);
-
-	console.log(left);
 	const activeTab = (tab, index) => {
 		setLeft(index * 100);
 		setTimeout(() => {
