@@ -7,10 +7,8 @@ const Trending = () => {
 
 	const { data, loading } = useFetch(`/trending/all/${endPoint}`);
 
-	console.log(data);
-
 	const onTabChange = (tab) => {
-		setEndPoint(tab === "day" ? "day" : "week");
+		setEndPoint(tab?.toLowerCase());
 	};
 	return (
 		<div className='carousel-section'>

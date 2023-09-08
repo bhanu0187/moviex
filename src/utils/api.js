@@ -13,6 +13,7 @@ export const fetchData = async (url, params) => {
 			headers,
 			params,
 		});
+		// console.log(BASE_URL + url);
 		return data;
 	} catch (error) {
 		console.log(error);

@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Home, Explore, PageNotFound, Details, SearchResult } from "./pages";
 import { Header, Footer } from "./components";
 import { fetchData } from "./utils/api";
-import { getApiConfiguration } from "./store/homeSlice";
+import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import { useEffect } from "react";
 
 function App() {
 	const dispatch = useDispatch();
-	const { url } = useSelector((state) => state.home);
 
 	useEffect(() => {
 		fetchApiConfig();
+		genresCall();
 	}, []);
 
 	const fetchApiConfig = () => {
@@ -26,6 +26,26 @@ function App() {
 			dispatch(getApiConfiguration(url));
 		});
 	};
+
+	const genresCall = async () => {
+		let promises = [];
+		let endPoints = ["tv", "movie"];
+		let allGeneras = {};
+
+		endPoints.forEach((endPoint) => {
+			promises.push(fetchData(`/genre/${endPoint}/list`));
+		});
+
+		const genreData = await Promise.all(promises);
+
+		genreData.map(({ genres }) => {
+			return genres.map((genre) => {
+				allGeneras[genre.id] = genre;
+			});
+		});
+		dispatch(getGenres(allGeneras));
+	};
+
 	return (
 		<BrowserRouter>
 			<Header />
@@ -52,7 +72,6 @@ function App() {
 					element={<PageNotFound />}
 				/>
 			</Routes>
-			<div style={{ height: 900 }}></div>
 			<Footer />
 		</BrowserRouter>
 	);
