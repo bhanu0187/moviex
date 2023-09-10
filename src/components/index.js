@@ -4,3 +4,5 @@ export { default as ContentWrapper } from "./contentWrapper/ContentWrapper";
 export { default as Img } from "./lazyloading/Img";
 export { default as Switchtabs } from "./switchTabs/Switchtabs";
 export { default as Carousel } from "./carousel/Carousel.jsx";
+export { default as Rating } from "./rating/Rating.jsx";
+export { default as Genres } from "./genres/Genres.jsx";

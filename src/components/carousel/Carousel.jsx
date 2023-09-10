@@ -13,14 +13,26 @@ import Img from "../lazyloading/Img";
 import PosterFallback from "../../assets/no-poster.png";
 
 import "./style.scss";
-import Rating from "../rating/Rating";
+import { Rating, Genres } from "../index";
 
 const Carousel = ({ data, loading }) => {
 	const carouselContainerRef = useRef();
 	const { url } = useSelector((state) => state.home);
 	const navigate = useNavigate();
 
-	const navigation = (navDirection) => {};
+	const navigation = (navDirection) => {
+		const container = carouselContainerRef.current;
+
+		const scrollAmount =
+			navDirection === "left"
+				? container.scrollLeft - (container.offsetWidth + 20)
+				: container.scrollLeft + (container.offsetWidth + 20);
+
+		container.scrollTo({
+			left: scrollAmount,
+			behavior: "smooth",
+		});
+	};
 
 	const skItem = () => {
 		return (
@@ -46,7 +58,10 @@ const Carousel = ({ data, loading }) => {
 					onClick={() => navigation("right")}
 				/>
 				{!loading ? (
-					<div className='carousel-items'>
+					<div
+						className='carousel-items'
+						ref={carouselContainerRef}
+					>
 						{data?.map((item) => {
 							const posterUrl = item?.poster_path
 								? url.poster + item.poster_path
@@ -55,15 +70,17 @@ const Carousel = ({ data, loading }) => {
 								<div
 									className='carousel-item'
 									key={item.id}
+									onClick={() => navigate(`/${item.media_type}/${item.id}`)}
 								>
 									<div className='poster-block'>
 										<Img src={posterUrl} />
 										<Rating rating={item.vote_average.toFixed(1)} />
+										<Genres data={item.genre_ids.slice(0, 2)} />
 									</div>
 									<div className='text-block'>
 										<span className='title'>{item.title || item.name}</span>
 										<span className='date'>
-											{dayjs(item.release_date).format("MM D, YYYY")}
+											{dayjs(item.release_date).format("MM, D, YYYY")}
 										</span>
 									</div>
 								</div>
