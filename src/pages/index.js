@@ -3,3 +3,7 @@ export { default as PageNotFound } from "./errorPage/PageNotFound";
 export { default as Explore } from "./explore/Explore";
 export { default as Home } from "./home/Home";
 export { default as SearchResult } from "./searchResult/SearchResult.jsx";
+export { default as TopRated } from "./home/topRated/TopRated.jsx";
+export { default as HeroBanner } from "./home/heroBanner/HeroBanner.jsx";
+export { default as Popular } from "./home/popular/Popular.jsx";
+export { default as Trending } from "./home/trending/Trending.jsx";

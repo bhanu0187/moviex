@@ -1,12 +1,13 @@
 import "./style.scss";
-import HeroBanner from "./heroBanner/HeroBanner";
-import Trending from "./trending/trending";
+import { HeroBanner, Trending, Popular, TopRated } from "../index";
 
 const Home = () => {
 	return (
 		<div className='homePage'>
 			<HeroBanner />
 			<Trending />
+			<Popular />
+			<TopRated />
 		</div>
 	);
 };

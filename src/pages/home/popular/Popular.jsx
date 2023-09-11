@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { Carousel, ContentWrapper, Switchtabs } from "../../../components";
 import useFetch from "../../../hooks/useFetch";
 
-const Trending = () => {
-	const [endPoint, setEndPoint] = useState("day");
+const Popular = () => {
+	const [endPoint, setEndPoint] = useState("movie");
 
-	const { data, loading } = useFetch(`/trending/all/${endPoint}`);
+	const { data, loading } = useFetch(`/${endPoint}/popular
+`);
 
 	const onTabChange = (tab) => {
-		setEndPoint(tab === "Day" ? "day" : "week");
+		setEndPoint(tab === "Movies" ? "movie" : "tv");
 	};
 	return (
 		<div className='carousel-section'>
 			<ContentWrapper>
-				<span className='carousel-title'>Trending</span>
+				<span className='carousel-title'>Popular Movies and TV Shows</span>
 				<Switchtabs
-					data={["Day", "Week"]}
+					data={["Movies", "TV Shows"]}
 					onTabChange={onTabChange}
 				/>
 			</ContentWrapper>
@@ -27,4 +28,4 @@ const Trending = () => {
 	);
 };
 
-export default Trending;
+export default Popular;
